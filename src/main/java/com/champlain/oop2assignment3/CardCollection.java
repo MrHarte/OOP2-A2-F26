@@ -13,4 +13,12 @@ public abstract class CardCollection implements Iterable<Card>{
         }
         return result.toString();
     }
+
+    public int size() {
+        int count = 0;
+        for (Card _ : this) {
+            count++;
+        }
+        return count;
+    }
 }

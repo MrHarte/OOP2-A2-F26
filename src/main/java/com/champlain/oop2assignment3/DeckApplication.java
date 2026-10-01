@@ -20,7 +20,7 @@ public class DeckApplication extends Application {
     @Override
     public void start(Stage pStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(DeckApplication.class.getResource("deck-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 530, 340);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 340);
         pStage.setTitle("Hello!");
         pStage.setScene(scene);
         pStage.show();
@@ -30,7 +30,7 @@ public class DeckApplication extends Application {
      * Main method executed on launch.
      * @param pArgs Additional program arguments. Not used.
      */
-    public static void main(String[] pArgs) {
+    static void main(String[] pArgs) {
         launch();
     }
 }

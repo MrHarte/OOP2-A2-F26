@@ -54,6 +54,6 @@ public class Deck extends CardCollection implements CardSource {
      * @return an iterator for the cards
      */
     public Iterator<Card> iterator() {
-        return this.aCards.iterator();
+        return Collections.unmodifiableList(this.aCards).iterator();
     }
 }

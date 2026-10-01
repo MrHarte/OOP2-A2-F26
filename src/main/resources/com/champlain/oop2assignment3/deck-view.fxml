@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="341.0" prefWidth="530.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.champlain.oop2assignment3.DeckController">
+<VBox alignment="CENTER" prefHeight="341.0" prefWidth="698.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.champlain.oop2assignment3.DeckController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -28,6 +28,10 @@
                 <Label text="Score: " />
                 <Label fx:id="aScoreLabel" text="0" />
             </HBox>
+         <HBox prefHeight="47.0" prefWidth="200.0">
+            <Label text="Classification: " />
+            <Label fx:id="aClassificationLabel" text="none" />
+         </HBox>
         </VBox>
     </HBox>
     <GridPane prefWidth="360.0">
@@ -35,6 +39,7 @@
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -42,8 +47,9 @@
         </rowConstraints>
       <ChoiceBox fx:id="aSortStrategyChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
         <Button onAction="#onSortButtonClick" prefHeight="25.0" prefWidth="100.0" text="Sort" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button onAction="#onShuffleButtonClick" prefHeight="25.0" prefWidth="100.0" text="Shuffle" GridPane.rowIndex="1" />
+        <Button onAction="#onShuffleButtonClick" prefHeight="25.0" prefWidth="100.0" text="Shuffle" />
         <Button onAction="#onScoreButtonClick" prefHeight="25.0" prefWidth="100.0" text="Score" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <ChoiceBox fx:id="aScoreStrategyChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" />
+      <Button onAction="#onClassifyButtonClick" prefHeight="25.0" prefWidth="100.0" text="Classify" GridPane.columnIndex="3" />
     </GridPane>
 </VBox>

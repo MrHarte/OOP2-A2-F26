@@ -46,6 +46,12 @@ public class DeckController {
     private Label aScoreLabel;
 
     /**
+     * Label for displaying the current classification of the hand.
+     */
+    @FXML
+    private Label aClassificationLabel;
+
+    /**
      * The deck of cards being managed by this controller.
      */
     private final Deck aDeck = new Deck();
@@ -61,7 +67,7 @@ public class DeckController {
      */
     public void initialize() {
         this.displayCardCollections();
-        this.aSortStrategyChoiceBox.getItems().addAll("Rank First", "Suit First");
+        this.aSortStrategyChoiceBox.getItems().addAll("Reverse Rank First", "Reverse Suit First");
         this.aScoreStrategyChoiceBox.getItems().addAll("Simple Count", "Number Of Aces");
     }
 
@@ -88,13 +94,13 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         } else {
             switch (choice) {
-                case "Rank First":
+                case "Reverse Rank First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by rank first yet.");
+                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
                     break;
-                case "Suit First":
+                case "Reverse Suit First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by suit first yet.");
+                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
                     break;
                 default:
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
@@ -153,5 +159,15 @@ public class DeckController {
     private void displayCardCollections() {
         this.aDeckTextArea.setText(this.aDeck.toString());
         this.aHandTextArea.setText(this.aHand.toString());
+    }
+
+    /**
+     * Handles the event when the classify button is clicked.
+     *
+     */
+    @FXML
+    protected void onClassifyButtonClick() {
+        // TODO: Replace the following line of code.
+        this.aClassificationLabel.setText("Not implemented.");
     }
 }
