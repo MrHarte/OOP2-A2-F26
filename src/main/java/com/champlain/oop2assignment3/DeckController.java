@@ -67,7 +67,7 @@ public class DeckController {
      */
     public void initialize() {
         this.displayCardCollections();
-        this.aSortStrategyChoiceBox.getItems().addAll("Reverse Rank First", "Reverse Suit First");
+        this.aSortStrategyChoiceBox.getItems().addAll("Rank Fist", "Reverse Rank First", "Reverse Suit First");
         this.aScoreStrategyChoiceBox.getItems().addAll("Simple Count", "Number Of Aces");
     }
 
