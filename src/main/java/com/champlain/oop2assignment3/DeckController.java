@@ -100,7 +100,8 @@ public class DeckController {
                     break;
                 case "Reverse Suit First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
+                    aDeck.sortByReverseSuitFirst();
+                    aDeckTextArea.setText(String.valueOf(aDeck));
                     break;
                 default:
                     this.aDeckTextArea.setText("This should not happen! You messed up.");

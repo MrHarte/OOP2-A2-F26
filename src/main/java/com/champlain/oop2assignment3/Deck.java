@@ -37,6 +37,13 @@ public class Deck extends CardCollection implements CardSource {
         Collections.shuffle(this.aCards);
     }
 
+    /**
+     * Sorts the cards in this deck by suit in descending order.
+     */
+    public void sortByReverseSuitFirst() {
+        this.aCards.sort(new ReverseSuitFirstComparator());
+    }
+
     public Card draw() {
         int last = this.aCards.size()-1;
         Card myCard = this.aCards.get(last);
