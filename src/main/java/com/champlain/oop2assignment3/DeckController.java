@@ -96,7 +96,8 @@ public class DeckController {
             switch (choice) {
                 case "Reverse Rank First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
+                    aDeck.sortByReverseRankFirst();
+                    aDeckTextArea.setText(String.valueOf(aDeck));
                     break;
                 case "Reverse Suit First":
                     // TODO: Replace the following line of code.
