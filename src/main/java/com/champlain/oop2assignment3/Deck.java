@@ -19,8 +19,8 @@ public class Deck extends CardCollection implements CardSource {
     private final List<Card> aCards = new ArrayList<>();
 
     /**
-     * Constructs a new Deck containing all standard playing cards.
-     * The deck is initialized with one of each rank and suit combination.
+     * Constructs a new Deck containing all standard playing cards. The deck is
+     * initialized with one of each rank and suit combination.
      */
     public Deck() {
         for (Rank currentRank : Rank.values()) {
@@ -28,6 +28,10 @@ public class Deck extends CardCollection implements CardSource {
                 this.aCards.add(new Card(currentRank, currentSuit));
             }
         }
+    }
+
+    public void sort() {
+        Collections.sort(this.aCards, new ReverseRankFirstComparator());
     }
 
     /**
@@ -38,7 +42,7 @@ public class Deck extends CardCollection implements CardSource {
     }
 
     public Card draw() {
-        int last = this.aCards.size()-1;
+        int last = this.aCards.size() - 1;
         Card myCard = this.aCards.get(last);
         this.aCards.remove(last);
         return myCard;
