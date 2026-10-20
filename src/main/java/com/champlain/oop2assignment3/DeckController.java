@@ -103,7 +103,7 @@ public class DeckController {
                     this.displayCardCollections();
                     break;
                 case "Reverse Suit First":
-                    // TODO: Replace the following line of code.
+                    // Sort this deck by suit first in descending order.
                     this.aDeck.sort(new ReverseSuitFirstComparator());
                     this.displayCardCollections();
                     break;
