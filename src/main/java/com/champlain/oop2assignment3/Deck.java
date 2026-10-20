@@ -54,7 +54,13 @@ public class Deck extends CardCollection implements CardSource {
         return Collections.unmodifiableList(this.aCards).iterator();
     }
 
+    /**
+     * Sorts the cards in this deck.
+     * The sorting strategy can be switched dynamically, either by rank first, or by suit first.
+     *
+     * @param sortingStrategy The chosen sorting strategy as a Comparator of Card type. Either by rank first, or by suit first.
+     */
     public void sort(Comparator<Card> sortingStrategy) {
-        aCards.sort(sortingStrategy);
+        this.aCards.sort(sortingStrategy);
     }
 }

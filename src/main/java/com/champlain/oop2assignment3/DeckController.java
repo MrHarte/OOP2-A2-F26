@@ -95,7 +95,7 @@ public class DeckController {
         } else {
             switch (choice) {
                 case "Reverse Rank First":
-                    // TODO: Replace the following line of code.
+                    // Sort this deck by rank first in descending order.
                     this.aDeck.sort(new ReverseRankFirstComparator());
                     this.displayCardCollections();
                     break;
