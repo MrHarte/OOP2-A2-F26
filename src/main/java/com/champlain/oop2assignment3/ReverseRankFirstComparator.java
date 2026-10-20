@@ -17,12 +17,12 @@ public class ReverseRankFirstComparator implements Comparator<Card> {
      *
      * @param card1 The first object to be compared.
      * @param card2 The second object to be compared.
-     * @return suitDifference if the object's ranks are equal (0), or rankDifference if they are different.
+     * @return suitDifference if the objects' ranks are equal (0), or rankDifference if they are different.
      */
     @Override
     public int compare(Card card1, Card card2) {
         int rankDifference = card2.getRank().compareTo(card1.getRank());
-        int suitDifference = card1.getSuit().ordinal() - card2.getSuit().ordinal();
+        int suitDifference = card2.getSuit().ordinal() - card1.getSuit().ordinal();
 
         if (rankDifference == 0) {
             return suitDifference;
