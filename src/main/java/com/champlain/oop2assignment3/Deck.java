@@ -1,9 +1,6 @@
 package com.champlain.oop2assignment3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a deck of playing cards.
@@ -55,5 +52,15 @@ public class Deck extends CardCollection implements CardSource {
      */
     public Iterator<Card> iterator() {
         return Collections.unmodifiableList(this.aCards).iterator();
+    }
+
+    /**
+     * Sorts the cards in this deck.
+     * The sorting strategy can be switched dynamically, either by rank first, or by suit first.
+     *
+     * @param sortingStrategy The chosen sorting strategy as a Comparator of Card type. Either by rank first, or by suit first.
+     */
+    public void sort(Comparator<Card> sortingStrategy) {
+        this.aCards.sort(sortingStrategy);
     }
 }
