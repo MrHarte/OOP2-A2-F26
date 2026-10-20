@@ -53,8 +53,11 @@ public class DeckController {
 
     /**
      * The deck of cards being managed by this controller.
+     * Changed the new Deck(), for Deck.getInstance();
+     * Gets the single shared instance of the deck using
+     * the Singleton pattern.
      */
-    private final Deck aDeck = new Deck();
+    private final Deck aDeck = Deck.getInstance();
 
     /**
      * The hand of cards being managed by this controller.
@@ -95,12 +98,14 @@ public class DeckController {
         } else {
             switch (choice) {
                 case "Reverse Rank First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
+                    // Sort this deck by rank first in descending order.
+                    this.aDeck.sort(new ReverseRankFirstComparator());
+                    this.displayCardCollections();
                     break;
                 case "Reverse Suit First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
+                    // Sort this deck by suit first in descending order.
+                    this.aDeck.sort(new ReverseSuitFirstComparator());
+                    this.displayCardCollections();
                     break;
                 default:
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
