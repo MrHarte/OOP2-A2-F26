@@ -53,6 +53,9 @@ public class DeckController {
 
     /**
      * The deck of cards being managed by this controller.
+     * Changed the new Deck(), for Deck.getInstance();
+     * Gets the single shared instance of the deck using
+     * the Singleton pattern.
      */
     private final Deck aDeck = Deck.getInstance();
 
