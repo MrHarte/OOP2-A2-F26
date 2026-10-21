@@ -61,7 +61,6 @@ public class DeckController {
      */
     private final Hand aHand = new Hand();
 
-    private ScoringStrategy aScoringStrategy;
     /**
      * Initializes the controller and sets up the UI components.
      * This method is called after the FXML file has been loaded.
@@ -126,14 +125,16 @@ public class DeckController {
         } else {
             switch (choice) {
                 case "Simple Count":
-                    this.aScoringStrategy = new SimpleCountStrategy();
+                    // TODO: Replace the following line of code.
+                    this.aScoreLabel.setText("Simple count...");
                     break;
                 case "Number Of Aces":
-                    this.aScoringStrategy = new NumberOfAcesStrategy();
+                    // TODO: Replace the following line of code.
+                    this.aScoreLabel.setText("Number of aces...");
                     break;
                 default:
                     this.aScoreLabel.setText("This should not happen! You messed up.");
-                    return;
+                    break;
             }
         }
     }
