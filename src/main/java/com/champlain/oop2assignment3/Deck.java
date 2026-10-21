@@ -13,6 +13,8 @@ import java.util.List;
  * </p>
  */
 public class Deck extends CardCollection implements CardSource {
+    /** The single unique instance of the Deck. */
+    private static Deck Instance;
     /**
      * The list of cards in the deck.
      */
@@ -29,7 +31,18 @@ public class Deck extends CardCollection implements CardSource {
             }
         }
     }
-
+    /**
+     * Retrieves the single instance of the Deck.
+     * Uses synchronized lazy initialization to ensure thread safety.
+     *
+     * @return the single instance of {@link Deck}
+     */
+    public static synchronized Deck getInstance() {
+        if (Instance == null) {
+            Instance = new Deck();
+        }
+        return Instance;
+    }
     /**
      * Shuffles the cards in this deck randomly.
      */
