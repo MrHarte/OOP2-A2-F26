@@ -96,7 +96,8 @@ public class DeckController {
             switch (choice) {
                 case "Reverse Rank First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
+                    this.aDeck.sort(new ReversRankFirstComparator());
+                    this.displayCardCollections();
                     break;
                 case "Reverse Suit First":
                     // TODO: Replace the following line of code.
@@ -125,6 +126,7 @@ public class DeckController {
                 case "Simple Count":
                     // TODO: Replace the following line of code.
                     this.aScoreLabel.setText("Simple count...");
+                    displayCardCollections();
                     break;
                 case "Number Of Aces":
                     // TODO: Replace the following line of code.
