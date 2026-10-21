@@ -54,6 +54,10 @@ public class Deck extends CardCollection implements CardSource {
         return Collections.unmodifiableList(this.aCards).iterator();
     }
 
+    /**
+     *
+     * @param sortingStrategy sorting strategy wanting to be used
+     */
     public void sort(Comparator<Card> sortingStrategy) {
         aCards.sort(sortingStrategy);
     }
