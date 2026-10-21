@@ -7,7 +7,7 @@ public class SimpleCountStrategy {
      * @param pCards the hand of cards to evaluate
      * @return the number of cards in the collection
      */
-   
+
     public int calculateScore(CardCollection pCards) {
         if (pCards == null) {
             return 0;
