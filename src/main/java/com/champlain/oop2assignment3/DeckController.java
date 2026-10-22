@@ -61,6 +61,7 @@ public class DeckController {
      */
     private final Hand aHand = new Hand();
 
+    private ScoringStrategy aScoringStrategy;
     /**
      * Initializes the controller and sets up the UI components.
      * This method is called after the FXML file has been loaded.
@@ -96,11 +97,13 @@ public class DeckController {
             switch (choice) {
                 case "Reverse Rank First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
+                    aDeck.sortByReverseRankFirst();
+                    aDeckTextArea.setText(String.valueOf(aDeck));
                     break;
                 case "Reverse Suit First":
                     // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
+                    aDeck.sortByReverseSuitFirst();
+                    aDeckTextArea.setText(String.valueOf(aDeck));
                     break;
                 default:
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
@@ -123,16 +126,14 @@ public class DeckController {
         } else {
             switch (choice) {
                 case "Simple Count":
-                    // TODO: Replace the following line of code.
-                    this.aScoreLabel.setText("Simple count...");
+                    this.aScoringStrategy = new SimpleCountStrategy();
                     break;
                 case "Number Of Aces":
-                    // TODO: Replace the following line of code.
-                    this.aScoreLabel.setText("Number of aces...");
+                    this.aScoringStrategy = new NumberOfAcesStrategy();
                     break;
                 default:
                     this.aScoreLabel.setText("This should not happen! You messed up.");
-                    break;
+                    return;
             }
         }
     }
