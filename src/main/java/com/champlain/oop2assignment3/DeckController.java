@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
  * the current state of the deck and hand.
  * </p>
  */
-public class DeckController{
+public class DeckController {
     /**
      * TextArea for displaying the current state of the deck.
      */
@@ -44,6 +44,12 @@ public class DeckController{
      */
     @FXML
     private Label aScoreLabel;
+
+    /**
+     * Label for displaying the current classification of the hand.
+     */
+    @FXML
+    private Label aClassificationLabel;
 
     /**
      * The deck of cards being managed by this controller.
@@ -79,6 +85,7 @@ public class DeckController{
      * Handles the event when the sort button is clicked.
      * Sorts the deck based on the selected sorting strategy.
      * Displays an error alert if no strategy is selected.
+     *
      * @see RankFirstComparator
      * @see SuitFirstComparator
      */
@@ -91,12 +98,10 @@ public class DeckController{
         } else {
             switch (choice) {
                 case "Rank First":
-                    // TODO: Replace the following line of code.
                     this.aDeck.sort(new RankFirstComparator());
                     this.displayCardCollections();
                     break;
                 case "Suit First":
-                    // TODO: Replace the following line of code.
                     this.aDeck.sort(new SuitFirstComparator());
                     this.displayCardCollections();
                     break;
@@ -158,5 +163,14 @@ public class DeckController{
     private void displayCardCollections() {
         this.aDeckTextArea.setText(this.aDeck.toString());
         this.aHandTextArea.setText(this.aHand.toString());
+    }
+
+    /**
+     * Handles the event when the classify button is clicked.
+     */
+    @FXML
+    public void onClassifyButtonClick() {
+        // TODO: Partner A's feature implementation (SimplePokerHandClassifier)
+        this.aClassificationLabel.setText("Not implemented.");
     }
 }
