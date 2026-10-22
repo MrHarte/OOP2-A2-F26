@@ -175,5 +175,5 @@ public class DeckController {
     protected void onClassifyButtonClick() {
         // TODO: Replace the following line of code.
         this.aClassificationLabel.setText("Not implemented.");
-    } 
+    }
 }
