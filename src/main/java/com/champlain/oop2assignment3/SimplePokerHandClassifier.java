@@ -1,124 +1,191 @@
+
 package com.champlain.oop2assignment3;
 
 /**
- * Classifies a poker hand based on its cards.
+ * Classifies a poker hand.
  */
 public class SimplePokerHandClassifier implements PokerHandClassifier {
 
     /**
-     * Determines the type of five-card poker hand.
+     * Classifies a five-card hand.
      *
-     * @param pCards the cards in the hand
-     * @return the type of poker hand
-     * @throws IllegalArgumentException if the cards are null or do not contain exactly five cards
+     * @param pCards the hand
+     * @return the hand type
+     * @throws IllegalArgumentException if the hand is invalid
      */
     @Override
     public PokerHandType classify(CardCollection pCards) {
-        int[] rankCounts;
-        int[] suitCounts;
-        int pairs;
-        boolean isFlush;
-        boolean isStraight;
-        boolean hasThreeOfAKind;
-        boolean hasFourOfAKind;
-        boolean isRoyalStraight;
-        int consecutive;
-        PokerHandType type;
+        validateHand(pCards);
 
+        int[] aRankCounts = countRanks(pCards);
+        int[] aSuitCounts = countSuits(pCards);
+
+        boolean isFlush = isFlush(aSuitCounts);
+        boolean isStraight = isStraight(aRankCounts);
+        boolean isRoyalStraight = isRoyalStraight(aRankCounts);
+
+        return determineHandType(aRankCounts, isFlush, isStraight, isRoyalStraight);
+    }
+
+    /**
+     * Validates the hand.
+     *
+     * @param pCards the hand
+     * @throws IllegalArgumentException if the hand is invalid
+     */
+    private void validateHand(CardCollection pCards) {
         if (pCards == null) {
             throw new IllegalArgumentException("Cards cannot be null.");
         }
 
         if (pCards.size() != 5) {
-            throw new IllegalArgumentException(
-                    "A poker hand must contain exactly 5 cards.");
+            throw new IllegalArgumentException("A poker hand must contain exactly 5 cards.");
         }
+    }
 
-        rankCounts = new int[Rank.values().length];
-        suitCounts = new int[Suit.values().length];
-
-        pairs = 0;
-        isFlush = false;
-        isStraight = false;
-        hasThreeOfAKind = false;
-        hasFourOfAKind = false;
-        isRoyalStraight = false;
-        consecutive = 0;
-        type = PokerHandType.HIGH_CARD;
+    /**
+     * Counts each rank.
+     *
+     * @param pCards the hand
+     * @return the rank counts
+     */
+    private int[] countRanks(CardCollection pCards) {
+        int[] aRankCounts = new int[Rank.values().length];
 
         for (Card card : pCards) {
-            rankCounts[card.getRank().ordinal()]++;
-            suitCounts[card.getSuit().ordinal()]++;
+            aRankCounts[card.getRank().ordinal()]++;
         }
 
-        for (int i = 0; i < suitCounts.length; i++) {
-            if (suitCounts[i] == 5) {
-                isFlush = true;
+        return aRankCounts;
+    }
+
+    /**
+     * Counts each suit.
+     *
+     * @param pCards the hand
+     * @return the suit counts
+     */
+    private int[] countSuits(CardCollection pCards) {
+        int[] aSuitCounts = new int[Suit.values().length];
+
+        for (Card card : pCards) {
+            aSuitCounts[card.getSuit().ordinal()]++;
+        }
+
+        return aSuitCounts;
+    }
+
+    /**
+     * Checks for a flush.
+     *
+     * @param pSuitCounts the suit counts
+     * @return true if the hand is a flush
+     */
+    private boolean isFlush(int[] pSuitCounts) {
+        for (int i = 0; i < pSuitCounts.length; i++) {
+            if (pSuitCounts[i] == 5) {
+                return true;
             }
         }
 
-        for (int i = 0; i < rankCounts.length; i++) {
-            if (rankCounts[i] == 2) {
-                pairs++;
-            } else if (rankCounts[i] == 3) {
-                hasThreeOfAKind = true;
-            } else if (rankCounts[i] == 4) {
-                hasFourOfAKind = true;
-            }
-        }
+        return false;
+    }
 
-        for (int i = 0; i < rankCounts.length; i++) {
-            if (rankCounts[i] == 1) {
+    /**
+     * Checks for a straight.
+     *
+     * @param pRankCounts the rank counts
+     * @return true if the hand is a straight
+     */
+    private boolean isStraight(int[] pRankCounts) {
+        int consecutive = 0;
+
+        for (int i = 0; i < pRankCounts.length; i++) {
+            if (pRankCounts[i] == 1) {
                 consecutive++;
 
                 if (consecutive == 5) {
-                    isStraight = true;
+                    return true;
                 }
             } else {
                 consecutive = 0;
             }
         }
 
-        if (rankCounts[Rank.TEN.ordinal()] == 1 && rankCounts[Rank.JACK.ordinal()] == 1 && rankCounts[Rank.QUEEN.ordinal()] == 1 && rankCounts[Rank.KING.ordinal()] == 1 && rankCounts[Rank.ACE.ordinal()] == 1) {
-            isRoyalStraight = true;
+        return false;
+    }
+
+    /**
+     * Checks for a royal straight.
+     *
+     * @param pRankCounts the rank counts
+     * @return true if the hand has a royal straight
+     */
+    private boolean isRoyalStraight(int[] pRankCounts) {
+        return pRankCounts[Rank.TEN.ordinal()] == 1 && pRankCounts[Rank.JACK.ordinal()] == 1 && pRankCounts[Rank.QUEEN.ordinal()] == 1 && pRankCounts[Rank.KING.ordinal()] == 1 && pRankCounts[Rank.ACE.ordinal()] == 1;
+    }
+
+    /**
+     * Determines the hand type.
+     *
+     * @param pRankCounts the rank counts
+     * @param pIsFlush whether the hand is a flush
+     * @param pIsStraight whether the hand is a straight
+     * @param pIsRoyalStraight whether the hand is a royal straight
+     * @return the hand type
+     */
+    private PokerHandType determineHandType(int[] pRankCounts, boolean pIsFlush, boolean pIsStraight, boolean pIsRoyalStraight) {
+
+        int pairs = 0;
+        boolean hasThreeOfAKind = false;
+        boolean hasFourOfAKind = false;
+
+        for (int i = 0; i < pRankCounts.length; i++) {
+            if (pRankCounts[i] == 2) {
+                pairs++;
+            } else if (pRankCounts[i] == 3) {
+                hasThreeOfAKind = true;
+            } else if (pRankCounts[i] == 4) {
+                hasFourOfAKind = true;
+            }
         }
 
-        if (pairs == 1) {
-            type = PokerHandType.PAIR;
+        if (pIsFlush && pIsRoyalStraight) {
+            return PokerHandType.ROYAL_FLUSH;
         }
 
-        if (pairs == 2) {
-            type = PokerHandType.TWO_PAIR;
-        }
-
-        if (hasThreeOfAKind) {
-            type = PokerHandType.THREE_OF_A_KIND;
-        }
-
-        if (isStraight || isRoyalStraight) {
-            type = PokerHandType.STRAIGHT;
-        }
-
-        if (isFlush) {
-            type = PokerHandType.FLUSH;
-        }
-
-        if (hasThreeOfAKind && pairs == 1) {
-            type = PokerHandType.FULL_HOUSE;
+        if (pIsStraight && pIsFlush) {
+            return PokerHandType.STRAIGHT_FLUSH;
         }
 
         if (hasFourOfAKind) {
-            type = PokerHandType.FOUR_OF_A_KIND;
+            return PokerHandType.FOUR_OF_A_KIND;
         }
 
-        if (isStraight && isFlush) {
-            type = PokerHandType.STRAIGHT_FLUSH;
+        if (hasThreeOfAKind && pairs == 1) {
+            return PokerHandType.FULL_HOUSE;
         }
 
-        if (isFlush && isRoyalStraight) {
-            type = PokerHandType.ROYAL_FLUSH;
+        if (pIsFlush) {
+            return PokerHandType.FLUSH;
         }
 
-        return type;
+        if (pIsStraight || pIsRoyalStraight) {
+            return PokerHandType.STRAIGHT;
+        }
+
+        if (hasThreeOfAKind) {
+            return PokerHandType.THREE_OF_A_KIND;
+        }
+
+        if (pairs == 2) {
+            return PokerHandType.TWO_PAIR;
+        }
+
+        if (pairs == 1) {
+            return PokerHandType.PAIR;
+        }
+
+        return PokerHandType.HIGH_CARD;
     }
 }
