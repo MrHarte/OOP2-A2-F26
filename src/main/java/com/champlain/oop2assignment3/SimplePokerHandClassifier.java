@@ -1,9 +1,5 @@
 package com.champlain.oop2assignment3;
 
-<<<<<<< HEAD
-
-public class SimplePokerHandClassifier implements PokerHandClassifier {
-=======
 /**
  * Classifies a poker hand based on its cards.
  */
@@ -16,7 +12,6 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
      * @return the type of poker hand
      * @throws IllegalArgumentException if the cards are null or do not contain exactly five cards
      */
->>>>>>> feature/ReverseSuitFirstComparator-fixed
     @Override
     public PokerHandType classify(CardCollection pCards) {
         int[] rankCounts;
