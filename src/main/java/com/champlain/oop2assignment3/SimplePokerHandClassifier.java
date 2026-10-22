@@ -79,11 +79,6 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
             }
         }
 
-
-        if (rankCounts[Rank.ACE.ordinal()] == 1 && rankCounts[Rank.TWO.ordinal()] == 1 && rankCounts[Rank.THREE.ordinal()] == 1 && rankCounts[Rank.FOUR.ordinal()] == 1 && rankCounts[Rank.FIVE.ordinal()] == 1) {
-            isStraight = true;
-        }
-
         if (rankCounts[Rank.TEN.ordinal()] == 1 && rankCounts[Rank.JACK.ordinal()] == 1 && rankCounts[Rank.QUEEN.ordinal()] == 1 && rankCounts[Rank.KING.ordinal()] == 1 && rankCounts[Rank.ACE.ordinal()] == 1) {
             isRoyalFlush = true;
         }
@@ -120,7 +115,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
             type = PokerHandType.STRAIGHT_FLUSH;
         }
 
-        if (isStraight && isFlush && isRoyalFlush) {
+        if (isFlush && isRoyalFlush) {
             type = PokerHandType.ROYAL_FLUSH;
         }
 
