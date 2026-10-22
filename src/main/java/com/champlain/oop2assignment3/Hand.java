@@ -11,7 +11,7 @@ import java.util.List;
  * It also provides an iterator to traverse the cards in the hand.
  * </p>
  */
-public class Hand extends CardCollection implements ScoringStrategy {
+public class Hand extends CardCollection {
     /**
      * The list of cards in this hand.
      */
@@ -44,8 +44,5 @@ public class Hand extends CardCollection implements ScoringStrategy {
         return this.aCards.iterator();
     }
 
-    @Override
-    public int calculateScore(CardCollection pCards) {
-        return 0;
-    }
+
 }
