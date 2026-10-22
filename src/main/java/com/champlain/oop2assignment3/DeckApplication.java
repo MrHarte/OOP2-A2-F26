@@ -1,11 +1,11 @@
 package com.champlain.oop2assignment3;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Launches the test application when executed.
@@ -28,6 +28,7 @@ public class DeckApplication extends Application {
 
     /**
      * Main method executed on launch.
+     * 
      * @param pArgs Additional program arguments. Not used.
      */
     static void main(String[] pArgs) {

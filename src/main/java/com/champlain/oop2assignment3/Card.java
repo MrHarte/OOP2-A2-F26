@@ -2,7 +2,9 @@ package com.champlain.oop2assignment3;
 
 /**
  * Represents a playing card with a specific suit and rank.
- * @implNote This class is immutable, meaning that once a card is created, its suit and rank cannot be changed.
+ * 
+ * @implNote This class is immutable, meaning that once a card is created, its
+ * suit and rank cannot be changed.
  */
 public class Card {
     /**
@@ -21,7 +23,7 @@ public class Card {
      * @param pRank the rank of the card (e.g., Ace, 2, 3, ..., King)
      * @param pSuit the suit of the card (e.g., Hearts, Diamonds, Clubs, Spades)
      */
-    public Card (Rank pRank, Suit pSuit) {
+    public Card(Rank pRank, Suit pSuit) {
         this.aRank = pRank;
         this.aSuit = pSuit;
     }
@@ -44,6 +46,23 @@ public class Card {
         return this.aSuit;
     }
 
+    /**
+     * Checks whether two cards are equal.
+     *
+     * @param pObject object to compare with this card
+     * @return true if the objects are the same card, false if they're different
+     */
+    @Override
+    public boolean equals(Object pObject) {
+        if (this == pObject) {
+            return true;
+        }
+        if (!(pObject instanceof Card other)) {
+            return false;
+        }
+        return this.aRank == other.aRank
+                && this.aSuit == other.aSuit;
+    }
     /**
      * Returns a string representation of this card.
      *

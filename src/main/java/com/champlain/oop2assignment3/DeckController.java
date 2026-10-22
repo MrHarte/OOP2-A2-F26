@@ -7,7 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 /**
- * Controller class for managing the deck and hand of cards in the user interface.
+ * Controller class for managing the deck and hand of cards in the user
+ * interface.
  * <p>
  * This class handles user interactions with the deck, including shuffling,
  * sorting, scoring, and drawing cards. It updates the UI components to reflect
@@ -40,7 +41,8 @@ public class DeckController {
     private ChoiceBox<String> aScoreStrategyChoiceBox;
 
     /**
-     * Label for displaying the current score based on the selected scoring strategy.
+     * Label for displaying the current score based on the selected scoring
+     * strategy.
      */
     @FXML
     private Label aScoreLabel;
@@ -52,18 +54,18 @@ public class DeckController {
     private Label aClassificationLabel;
 
     /**
-     * The deck of cards being managed by this controller.
-     */
-    private final Deck aDeck = new Deck();
-
-    /**
      * The hand of cards being managed by this controller.
      */
     private final Hand aHand = new Hand();
 
     /**
-     * Initializes the controller and sets up the UI components.
-     * This method is called after the FXML file has been loaded.
+     * The deck of cards being managed by this controller.
+     */
+    private final Deck aDeck = Deck.getInstance();
+
+    /**
+     * Initializes the controller and sets up the UI components. This method is
+     * called after the FXML file has been loaded.
      */
     public void initialize() {
         this.displayCardCollections();
@@ -72,8 +74,8 @@ public class DeckController {
     }
 
     /**
-     * Handles the event when the shuffle button is clicked.
-     * Shuffles the deck and updates the displayed card collections.
+     * Handles the event when the shuffle button is clicked. Shuffles the deck
+     * and updates the displayed card collections.
      */
     @FXML
     protected void onShuffleButtonClick() {
@@ -82,9 +84,9 @@ public class DeckController {
     }
 
     /**
-     * Handles the event when the sort button is clicked.
-     * Sorts the deck based on the selected sorting strategy.
-     * Displays an error alert if no strategy is selected.
+     * Handles the event when the sort button is clicked. Sorts the deck based
+     * on the selected sorting strategy. Displays an error alert if no strategy
+     * is selected.
      */
     @FXML
     protected void onSortButtonClick() {
@@ -94,25 +96,23 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         } else {
             switch (choice) {
-                case "Reverse Rank First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
-                    break;
-                case "Reverse Suit First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
-                    break;
-                default:
-                    this.aDeckTextArea.setText("This should not happen! You messed up.");
-                    break;
+            case "Reverse Rank First" -> {
+                this.aDeck.sort(new ReverseRankFirstComparator());
+                this.aDeckTextArea.setText(this.aDeck.toString());
+            }
+            case "Reverse Suit First" -> {
+                this.aDeck.sort(new ReverseSuitFirstComparator());
+                this.aDeckTextArea.setText(this.aDeck.toString());
+            }
+            default -> this.aDeckTextArea.setText("This should not happen! You messed up.");
             }
         }
     }
 
     /**
-     * Handles the event when the score button is clicked.
-     * Calculates the score based on the selected scoring strategy.
-     * Displays an error alert if no strategy is selected.
+     * Handles the event when the score button is clicked. Calculates the score
+     * based on the selected scoring strategy. Displays an error alert if no
+     * strategy is selected.
      */
     @FXML
     protected void onScoreButtonClick() {
@@ -122,25 +122,25 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         } else {
             switch (choice) {
-                case "Simple Count":
-                    // TODO: Replace the following line of code.
-                    this.aScoreLabel.setText("Simple count...");
-                    break;
-                case "Number Of Aces":
-                    // TODO: Replace the following line of code.
-                    this.aScoreLabel.setText("Number of aces...");
-                    break;
-                default:
-                    this.aScoreLabel.setText("This should not happen! You messed up.");
-                    break;
+            case "Simple Count":
+                // TODO: Replace the following line of code.
+                this.aScoreLabel.setText("Simple count...");
+                break;
+            case "Number Of Aces":
+                // TODO: Replace the following line of code.
+                this.aScoreLabel.setText("Number of aces...");
+                break;
+            default:
+                this.aScoreLabel.setText("This should not happen! You messed up.");
+                break;
             }
         }
     }
 
     /**
-     * Handles the event when the draw button is clicked.
-     * Draws a card from the deck and adds it to the player's hand.
-     * Displays an alert if there are no more cards in the deck.
+     * Handles the event when the draw button is clicked. Draws a card from the
+     * deck and adds it to the player's hand. Displays an alert if there are no
+     * more cards in the deck.
      */
     @FXML
     protected void onDrawButtonClick() {

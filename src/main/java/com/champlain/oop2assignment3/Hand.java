@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * Represents a hand of playing cards.
  * <p>
- * This class allows for adding cards to the hand and checking if the hand is empty.
- * It also provides an iterator to traverse the cards in the hand.
+ * This class allows for adding cards to the hand and checking if the hand is
+ * empty. It also provides an iterator to traverse the cards in the hand.
  * </p>
  */
 public class Hand extends CardCollection {
@@ -40,6 +40,7 @@ public class Hand extends CardCollection {
      *
      * @return an iterator for the cards
      */
+    @Override
     public Iterator<Card> iterator() {
         return this.aCards.iterator();
     }
