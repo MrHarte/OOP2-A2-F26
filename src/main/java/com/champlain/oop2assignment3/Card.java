@@ -56,21 +56,11 @@ public class Card {
     }
 
     /**
-     13
      * Compares this card to another object for equality.
-     14
-     * Two cards are considered equal if they have the same
-     15
-     * rank and suit.
-     16
-     *
-     17
+     * Two cards are considered equal if they have the same rank and suit.
      * @param obj the object to compare to this card
-    18
      * @return true if the cards have the same rank and suit;
-    19
      * false otherwise
-    20
      */
     @Override
     public boolean equals(Object obj) {
