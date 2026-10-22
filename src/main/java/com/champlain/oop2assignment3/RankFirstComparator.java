@@ -3,7 +3,9 @@ package com.champlain.oop2assignment3;
 import java.util.Comparator;
 
 /**
+ *
  Comparator that sorts cards by rank first, then by suit if ranks are equal.
+ * @implNote The comparison relies on the ordinal values of the {@code Rank} enum.
  **/
 public class RankFirstComparator implements Comparator<Card> {
 
