@@ -1,9 +1,6 @@
 package com.champlain.oop2assignment3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a deck of playing cards.
@@ -13,6 +10,8 @@ import java.util.List;
  * </p>
  */
 public class Deck extends CardCollection implements CardSource {
+    /** The single unique instance of the Deck. */
+    private static Deck Instance;
     /**
      * The list of cards in the deck.
      */
@@ -29,7 +28,18 @@ public class Deck extends CardCollection implements CardSource {
             }
         }
     }
-
+    /**
+     * Retrieves the single instance of the Deck.
+     * Uses synchronized lazy initialization to ensure thread safety.
+     *
+     * @return the single instance of {@link Deck}
+     */
+    public static synchronized Deck getInstance() {
+        if (Instance == null) {
+            Instance = new Deck();
+        }
+        return Instance;
+    }
     /**
      * Shuffles the cards in this deck randomly.
      */
@@ -55,5 +65,14 @@ public class Deck extends CardCollection implements CardSource {
      */
     public Iterator<Card> iterator() {
         return Collections.unmodifiableList(this.aCards).iterator();
+    }
+    /**
+     * This method sorts the list of card objects according to the order induced
+     * by the specified {@code Comparator}.
+     * @param comparator to determine the order of the cards
+     * @see Card
+     */
+    public void sort(Comparator<Card> comparator) {
+        this.aCards.sort(comparator);
     }
 }
