@@ -1,5 +1,7 @@
 package com.champlain.oop2assignment3;
-
+/**
+ * @author : Nelly
+ */
 public interface ScoringStrategy {
     /**
      * Calculates the score for a given collection of cards.

@@ -1,5 +1,7 @@
 package com.champlain.oop2assignment3;
-
+/**
+ * @author : Nelly and Ben
+ */
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;

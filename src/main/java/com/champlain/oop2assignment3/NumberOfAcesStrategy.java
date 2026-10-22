@@ -1,5 +1,9 @@
 package com.champlain.oop2assignment3;
 
+/**
+ * @author : Nelly
+ */
+
 public class NumberOfAcesStrategy {
         /**
          * Calculates the score by counting how many Ace cards are in the hand.

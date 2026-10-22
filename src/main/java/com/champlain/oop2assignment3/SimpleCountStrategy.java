@@ -1,5 +1,7 @@
 package com.champlain.oop2assignment3;
-
+/**
+ * @author : Nelly
+ */
 public class SimpleCountStrategy {
     /**
      * Calculates the score based on the number of cards in the hand.
