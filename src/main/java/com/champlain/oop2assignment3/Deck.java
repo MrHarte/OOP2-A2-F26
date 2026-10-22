@@ -39,6 +39,7 @@ public class Deck extends CardCollection implements CardSource {
         Card myCard = this.aCards.get(last);
         this.aCards.remove(last);
         return myCard;
+
     }
 
     public boolean isEmpty() {
