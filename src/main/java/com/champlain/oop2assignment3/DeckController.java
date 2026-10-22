@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
  * the current state of the deck and hand.
  * </p>
  */
-public class DeckController {
+public class DeckController{
     /**
      * TextArea for displaying the current state of the deck.
      */
@@ -46,15 +46,9 @@ public class DeckController {
     private Label aScoreLabel;
 
     /**
-     * Label for displaying the current classification of the hand.
-     */
-    @FXML
-    private Label aClassificationLabel;
-
-    /**
      * The deck of cards being managed by this controller.
      */
-    private final Deck aDeck = new Deck();
+    private final Deck aDeck = Deck.getInstance();
 
     /**
      * The hand of cards being managed by this controller.
@@ -67,7 +61,7 @@ public class DeckController {
      */
     public void initialize() {
         this.displayCardCollections();
-        this.aSortStrategyChoiceBox.getItems().addAll("Reverse Rank First", "Reverse Suit First");
+        this.aSortStrategyChoiceBox.getItems().addAll("Rank First", "Suit First");
         this.aScoreStrategyChoiceBox.getItems().addAll("Simple Count", "Number Of Aces");
     }
 
@@ -85,36 +79,28 @@ public class DeckController {
      * Handles the event when the sort button is clicked.
      * Sorts the deck based on the selected sorting strategy.
      * Displays an error alert if no strategy is selected.
-     *
      * @see RankFirstComparator
      * @see SuitFirstComparator
      */
     @FXML
     protected void onSortButtonClick() {
-
-        // Get the selected sorting strategy from the ChoiceBox
         String choice = this.aSortStrategyChoiceBox.getValue();
-        // Display an error message if no strategy has been selected
         if (choice == null) {
             Alert selectionErrorAlert = new Alert(Alert.AlertType.ERROR, "Please choose a sorting strategy first.");
             selectionErrorAlert.showAndWait();
         } else {
-            // Apply the selected sorting strategy
             switch (choice) {
-                case "Reverse Rank First":
-
-                    // Sort the deck by rank using the RankFirstComparator
-                    this.aDeck.sort( new RankFirstComparator());
-                    // Refresh the user interface
+                case "Rank First":
+                    // TODO: Replace the following line of code.
+                    this.aDeck.sort(new RankFirstComparator());
                     this.displayCardCollections();
                     break;
-                case "Reverse Suit First":
+                case "Suit First":
+                    // TODO: Replace the following line of code.
                     this.aDeck.sort(new SuitFirstComparator());
                     this.displayCardCollections();
                     break;
                 default:
-                   // This case should never occur if the ChoiceBox
-                   // contains only valid sorting strategies
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
                     break;
             }
@@ -128,19 +114,12 @@ public class DeckController {
      */
     @FXML
     protected void onScoreButtonClick() {
-
-        // Get the selected scoring strategy from the ChoiceBox
         String choice = this.aScoreStrategyChoiceBox.getValue();
 
-        // Display an error message if no strategy is selected
         if (choice == null) {
             Alert selectionErrorAlert = new Alert(Alert.AlertType.ERROR, "Please choose a scoring strategy first.");
             selectionErrorAlert.showAndWait();
         } else {
-       // Reference to the selected scoring strategy
-            ScoringStrategy strategy = null;
-
-            // Create the appropriate strategy based on the user's selection
             switch (choice) {
                 case "Simple Count":
                     SimpleCountStrategy score = new SimpleCountStrategy();
@@ -151,14 +130,9 @@ public class DeckController {
                     this.aScoreLabel.setText(String.valueOf(numberOfAces.calculateScore(this.aHand)));
                     break;
                 default:
-                    // This case should never occur if the ChoiceBox
-                    // contains only valid strategy options
                     this.aScoreLabel.setText("This should not happen! You messed up.");
                     break;
             }
-            // Calculate and display the score using the chosen strategy
-            int score = strategy.calculateScore(this.aHand);
-            this.aScoreLabel.setText(String.valueOf(score));
         }
     }
 
@@ -184,14 +158,5 @@ public class DeckController {
     private void displayCardCollections() {
         this.aDeckTextArea.setText(this.aDeck.toString());
         this.aHandTextArea.setText(this.aHand.toString());
-    }
-
-    /**
-     * Handles the event when the classify button is clicked.
-     *
-     */
-    @FXML
-    protected void onClassifyButtonClick() {
-        this.aClassificationLabel.setText("Not Implemented.");
     }
 }
