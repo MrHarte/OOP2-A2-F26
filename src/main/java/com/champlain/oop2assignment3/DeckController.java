@@ -99,8 +99,8 @@ public class DeckController {
                     this.displayCardCollections();
                     break;
                 case "Reverse Suit First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
+                    this.aDeck.sort(new ReverseSuitFirstComparator());
+                    this.displayCardCollections();
                     break;
                 default:
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
@@ -168,7 +168,16 @@ public class DeckController {
      */
     @FXML
     protected void onClassifyButtonClick() {
-        // TODO: Replace the following line of code.
-        this.aClassificationLabel.setText("Not implemented.");
+        PokerHandClassifier classifier = new SimplePokerHandClassifier();
+
+        try {
+            PokerHandType type = classifier.classify(this.aHand);
+            this.aClassificationLabel.setText(type.toString());
+        }
+        catch (IllegalArgumentException e) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            errorAlert.setHeaderText("Classification Error");
+            errorAlert.showAndWait();
+        }
     }
 }
