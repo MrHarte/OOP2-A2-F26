@@ -85,24 +85,36 @@ public class DeckController {
      * Handles the event when the sort button is clicked.
      * Sorts the deck based on the selected sorting strategy.
      * Displays an error alert if no strategy is selected.
+     *
+     * @see RankFirstComparator
+     * @see SuitFirstComparator
      */
     @FXML
     protected void onSortButtonClick() {
+
+        // Get the selected sorting strategy from the ChoiceBox
         String choice = this.aSortStrategyChoiceBox.getValue();
+        // Display an error message if no strategy has been selected
         if (choice == null) {
             Alert selectionErrorAlert = new Alert(Alert.AlertType.ERROR, "Please choose a sorting strategy first.");
             selectionErrorAlert.showAndWait();
         } else {
+            // Apply the selected sorting strategy
             switch (choice) {
                 case "Reverse Rank First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse rank first yet.");
+
+                    // Sort the deck by rank using the RankFirstComparator
+                    this.aDeck.sort( new RankFirstComparator());
+                    // Refresh the user interface
+                    this.displayCardCollections();
                     break;
                 case "Reverse Suit First":
-                    // TODO: Replace the following line of code.
-                    this.aDeckTextArea.setText("This does not sort by reverse suit first yet.");
+                    this.aDeck.sort(new SuitFirstComparator());
+                    this.displayCardCollections();
                     break;
                 default:
+                   // This case should never occur if the ChoiceBox
+                   // contains only valid sorting strategies
                     this.aDeckTextArea.setText("This should not happen! You messed up.");
                     break;
             }
@@ -116,24 +128,31 @@ public class DeckController {
      */
     @FXML
     protected void onScoreButtonClick() {
+
+        // Get the selected scoring strategy from the ChoiceBox
         String choice = this.aScoreStrategyChoiceBox.getValue();
+
+        // Display an error message if no strategy is selected
         if (choice == null) {
             Alert selectionErrorAlert = new Alert(Alert.AlertType.ERROR, "Please choose a scoring strategy first.");
             selectionErrorAlert.showAndWait();
         } else {
-            ScoringStrategy strategy =null;
+       // Reference to the selected scoring strategy
+            ScoringStrategy strategy = null;
+
+            // Create the appropriate strategy based on the user's selection
             switch (choice) {
                 case "Simple Count":
-                    // TODO: Replace the following line of code.
-                    strategy = new  SimpleCountStrategy();
-                    this.aScoreLabel.setText("Simple count...");
+                    SimpleCountStrategy score = new SimpleCountStrategy();
+                    this.aScoreLabel.setText(String.valueOf(score.calculateScore(this.aHand)));
                     break;
                 case "Number Of Aces":
-                    // TODO: Replace the following line of code.
-                    strategy = new NumberOfAcesStrategy();
-                    this.aScoreLabel.setText("Number of aces...");
+                    NumberOfAcesStrategy numberOfAces = new NumberOfAcesStrategy();
+                    this.aScoreLabel.setText(String.valueOf(numberOfAces.calculateScore(this.aHand)));
                     break;
                 default:
+                    // This case should never occur if the ChoiceBox
+                    // contains only valid strategy options
                     this.aScoreLabel.setText("This should not happen! You messed up.");
                     break;
             }
@@ -173,7 +192,6 @@ public class DeckController {
      */
     @FXML
     protected void onClassifyButtonClick() {
-        // TODO: Replace the following line of code.
-        this.aClassificationLabel.setText("Not implemented.");
+        this.aClassificationLabel.setText("Not Implemented.");
     }
 }
