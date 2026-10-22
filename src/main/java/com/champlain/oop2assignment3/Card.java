@@ -1,5 +1,7 @@
 package com.champlain.oop2assignment3;
 
+import java.util.Objects;
+
 /**
  * Represents a playing card with a specific suit and rank.
  * @implNote This class is immutable, meaning that once a card is created, its suit and rank cannot be changed.
@@ -21,7 +23,7 @@ public class Card {
      * @param pRank the rank of the card (e.g., Ace, 2, 3, ..., King)
      * @param pSuit the suit of the card (e.g., Hearts, Diamonds, Clubs, Spades)
      */
-    public Card (Rank pRank, Suit pSuit) {
+    public Card(Rank pRank, Suit pSuit) {
         this.aRank = pRank;
         this.aSuit = pSuit;
     }
@@ -43,7 +45,6 @@ public class Card {
     public Suit getSuit() {
         return this.aSuit;
     }
-
     /**
      * Returns a string representation of this card.
      *
@@ -52,5 +53,35 @@ public class Card {
     @Override
     public String toString() {
         return this.getRank() + " of " + this.getSuit();
+    }
+
+    /**
+     * Compares this card to another object for equality.
+     * Two cards are considered equal if they have the same rank and suit.
+     * @param obj the object to compare to this card
+     * @return true if the cards have the same rank and suit;
+     * false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        // Check if both references point to the same object
+        if (this == obj) return true;
+        // Verify that the object is a Card
+        if (!(obj instanceof Card)) return false;
+        // Cast the object to a Card so its attributes can be compared
+        Card comparedCard = (Card) obj;
+        //Compare both the rank and suit of the cards
+        return this.aRank == comparedCard.aRank && this.aSuit == comparedCard.aSuit;
+    }
+
+    /**
+     * Generates a hash code for this card based on its rank and suit.
+     * Equal cards will generate the same hash code.
+     * @return the hash code value for this card
+     */
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.aRank, this.aSuit);
     }
 }
