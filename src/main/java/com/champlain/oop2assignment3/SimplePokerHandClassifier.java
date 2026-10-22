@@ -21,7 +21,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
         boolean isStraight;
         boolean hasThreeOfAKind;
         boolean hasFourOfAKind;
-        boolean isRoyalFlush;
+        boolean isRoyalStraight;
         int consecutive;
         PokerHandType type;
 
@@ -42,7 +42,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
         isStraight = false;
         hasThreeOfAKind = false;
         hasFourOfAKind = false;
-        isRoyalFlush = false;
+        isRoyalStraight = false;
         consecutive = 0;
         type = PokerHandType.HIGH_CARD;
 
@@ -80,7 +80,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
         }
 
         if (rankCounts[Rank.TEN.ordinal()] == 1 && rankCounts[Rank.JACK.ordinal()] == 1 && rankCounts[Rank.QUEEN.ordinal()] == 1 && rankCounts[Rank.KING.ordinal()] == 1 && rankCounts[Rank.ACE.ordinal()] == 1) {
-            isRoyalFlush = true;
+            isRoyalStraight = true;
         }
 
         if (pairs == 1) {
@@ -95,7 +95,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
             type = PokerHandType.THREE_OF_A_KIND;
         }
 
-        if (isStraight) {
+        if (isStraight || isRoyalStraight) {
             type = PokerHandType.STRAIGHT;
         }
 
@@ -115,7 +115,7 @@ public class SimplePokerHandClassifier implements PokerHandClassifier {
             type = PokerHandType.STRAIGHT_FLUSH;
         }
 
-        if (isFlush && isRoyalFlush) {
+        if (isFlush && isRoyalStraight) {
             type = PokerHandType.ROYAL_FLUSH;
         }
 
