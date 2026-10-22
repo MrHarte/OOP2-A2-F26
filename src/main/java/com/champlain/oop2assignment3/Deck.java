@@ -76,4 +76,3 @@ public class Deck extends CardCollection implements CardSource {
         this.aCards.sort(comparator);
     }
 }
-
