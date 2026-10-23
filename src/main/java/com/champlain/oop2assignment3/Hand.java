@@ -43,4 +43,6 @@ public class Hand extends CardCollection {
     public Iterator<Card> iterator() {
         return this.aCards.iterator();
     }
+
+
 }
